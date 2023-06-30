@@ -1,0 +1,31 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+    fetch-registry: 'true'
+    register-with-eureka: 'true'
+  instance:
+    prefer-ip-address: 'true'
+api:
+  cached: 'false'
+  cache:
+    local: 'false'
+spring:
+  data:
+    redis:
+      url: redis://127.0.0.1:6379
+    mongodb:
+      database: songs
+      uri: mongodb://localhost:27017
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: 'false'

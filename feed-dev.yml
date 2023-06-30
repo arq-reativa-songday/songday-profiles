@@ -1,0 +1,26 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+    fetch-registry: 'true'
+    register-with-eureka: 'true'
+  instance:
+    prefer-ip-address: 'true'
+gateaway:
+  api:
+    address: http://localhost:8080/
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: 'false'
+  error:
+    include-stacktrace: on_param
