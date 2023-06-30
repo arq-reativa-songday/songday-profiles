@@ -20,7 +20,7 @@ eureka:
 spring:
   main:
     allow-bean-definition-overriding: 'true'
-    web-application-type: reactive
+    web-application-type: 'reactive'
   cloud:
     loadbalancer:
       ribbon:
