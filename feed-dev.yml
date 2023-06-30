@@ -24,3 +24,6 @@ spring:
         enabled: 'false'
   error:
     include-stacktrace: on_param
+  data:
+    redis:
+      url: redis://127.0.0.1:6379
