@@ -6,6 +6,11 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+    circuitbreakers:
+      enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
 eureka:
   client:
     service-url:
@@ -14,6 +19,8 @@ eureka:
     fetch-registry: 'true'
   instance:
     prefer-ip-address: 'true'
+    lease-renewal-interval-in-seconds: 2
+    lease-expiration-duration-in-seconds: 5
 api:
   cached: 'false'
   cache:
