@@ -6,6 +6,11 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+    circuitbreakers:
+      enabled: true
+  health:
+    circuitbreakers:
+      enabled: true      
 eureka:
   client:
     service-url:
@@ -14,6 +19,8 @@ eureka:
     fetch-registry: 'true'
   instance:
     prefer-ip-address: 'true'
+    lease-renewal-interval-in-seconds: 2
+    lease-expiration-duration-in-seconds: 5
 api:
   cached: 'false'
   cache:
@@ -35,3 +42,26 @@ spring:
 gateaway:
   api:
     address: http://localhost:8080/
+
+
+
+
+resilience4j.circuitbreaker:
+  instances:
+    songs-find-by-id:
+      registerHealthIndicator: true
+      failureRateThreshold: 50
+      minimumNumberOfCalls: 5
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 7s
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowSize: 10
+      slidingWindowType: COUNT_BASED
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+        - java.lang.IllegalStateException
+        - java.util.concurrent.TimeoutException
+        - org.springframework.web.client.ResourceAccessException
+        - java.lang.RuntimeException
+        - java.lang.Throwable    
